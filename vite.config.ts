@@ -5,9 +5,9 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Requerido para GitHub Pages (subpath /Amas-Dragon-Knight/)
-  // Para Easypanel con dominio raíz, cambiar a base: '/'
-  base: '/Amas-Dragon-Knight/',
+  // base: '/' porque usamos dominio personalizado (dragon-knight.amasteamwolf.com)
+  // que sirve desde la raíz, no bajo un subdirectorio.
+  base: '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
