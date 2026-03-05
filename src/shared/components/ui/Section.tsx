@@ -2,9 +2,10 @@ import { type FC, type ReactNode } from 'react';
 import { cn } from '@/shared/utils/cn';
 
 interface SectionProps {
-    background?: 'dark' | 'darker' | 'light' | 'none';
+    background?: 'dark' | 'darker' | 'light' | 'gradient' | 'none';
     spacing?: 'sm' | 'md' | 'lg' | 'xl';
     container?: boolean;
+    decorative?: boolean;
     id?: string;
     className?: string;
     children: ReactNode;
@@ -24,6 +25,7 @@ export const Section: FC<SectionProps> = ({
     const backgroundClasses = {
         dark: 'bg-dk-black',
         darker: 'bg-dk-gray-900',
+        gradient: 'bg-gradient-to-br from-[#0C0C0F] to-[#1A1A20]',
         light: 'bg-dk-gray-100',
         none: '',
     };

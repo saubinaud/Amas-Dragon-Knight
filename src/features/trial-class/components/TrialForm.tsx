@@ -2,7 +2,7 @@ import { type FC, useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle } from 'lucide-react';
 import { Button } from '@/shared/components/ui/Button';
-import { Input } from '@/shared/components/ui-forms/Input';
+import { Input } from '@/shared/components/ui-forms/input';
 
 interface FormData {
     studentName: string;
