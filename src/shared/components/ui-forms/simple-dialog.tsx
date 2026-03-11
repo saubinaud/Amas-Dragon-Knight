@@ -34,7 +34,7 @@ export const SimpleDialog: React.FC<SimpleDialogProps> = ({ isOpen, onClose, chi
 
             {/* Content */}
             <div
-                className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#141418] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50 overflow-x-hidden transition-all duration-300 transform scale-100 opacity-100"
+                className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#222225] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50 overflow-x-hidden transition-all duration-300 transform scale-100 opacity-100"
             >
                 <button
                     onClick={onClose}

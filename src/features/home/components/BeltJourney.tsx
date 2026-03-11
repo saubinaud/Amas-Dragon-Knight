@@ -42,7 +42,7 @@ const BELT_MILESTONES = [
     },
     {
         belt: 'Rojo',
-        color: '#E8000A',
+        color: '#C8102E',
         bg: '#1A0000',
         title: 'Poder',
         description: 'Dominio técnico y preparación para liderazgo.',
@@ -51,7 +51,7 @@ const BELT_MILESTONES = [
     },
     {
         belt: 'Negro',
-        color: '#E8000A',
+        color: '#C8102E',
         bg: '#0A0A0A',
         title: 'Maestría',
         description: 'Excelencia técnica, liderazgo y espíritu de campeón.',

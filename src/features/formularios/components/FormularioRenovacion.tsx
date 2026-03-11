@@ -1218,7 +1218,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
 
   // Formulario completo cuando ya hay un plan seleccionado
   return (
-    <div ref={formularioRef} className="min-h-screen bg-zinc-950 pt-24 sm:pt-28">
+    <div ref={formularioRef} className="min-h-screen bg-dk-black pt-24 sm:pt-28">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header con plan seleccionado */}
         <div className="bg-gradient-to-r from-[#FA7B21]/20 to-[#FCA929]/20 border border-[#FA7B21]/30 rounded-2xl p-6 mb-8">
@@ -1269,7 +1269,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                   id="nombreAlumno"
                   value={formData.nombreAlumno}
                   onChange={(e) => handleInputChange('nombreAlumno', e.target.value)}
-                  
+
                   required
                   autoComplete="name"
                 />
@@ -1282,7 +1282,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                   id="dniAlumno"
                   value={formData.dniAlumno}
                   onChange={(e) => handleInputChange('dniAlumno', e.target.value)}
-                  
+
                   maxLength={8}
                   required
                 />
@@ -1296,7 +1296,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                   type="date"
                   value={formData.fechaNacimiento}
                   onChange={(e) => handleFechaNacimientoChange(e.target.value)}
-                  
+
                   required
                 />
 
@@ -1385,7 +1385,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                   id="nombrePadre"
                   value={formData.nombrePadre}
                   onChange={(e) => handleInputChange('nombrePadre', e.target.value)}
-                  
+
                   required
                   autoComplete="name"
                 />
@@ -1398,7 +1398,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                   id="dniPadre"
                   value={formData.dniPadre}
                   onChange={(e) => handleInputChange('dniPadre', e.target.value)}
-                  
+
                   maxLength={8}
                   required
                 />
@@ -1412,7 +1412,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  
+
                   required
                   autoComplete="email"
                 />
@@ -1425,7 +1425,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                   id="direccion"
                   value={formData.direccion}
                   onChange={(e) => handleInputChange('direccion', e.target.value)}
-                  
+
                   autoComplete="street-address"
                 />
               </div>
@@ -1460,7 +1460,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                         value={option.value}
                         checked={polosOption === option.value}
                         onChange={(e) => handlePolosChange(e.target.value as '0' | '1' | '2' | '3')}
-                        
+
                       />
                       <div className="text-white text-sm flex-1">
                         {option.label === 'Ninguno' ? option.label : `${option.label} × ${option.price}`}
@@ -1617,7 +1617,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
                     value={formData.fechaInicio !== 'no-especificado' ? formData.fechaInicio : ''}
                     onChange={(e) => handleInputChange('fechaInicio', e.target.value)}
                     min={new Date().toISOString().split('T')[0]}
-                    
+
                   />
                 </div>
               )}

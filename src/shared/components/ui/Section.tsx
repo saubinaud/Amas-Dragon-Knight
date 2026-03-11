@@ -25,7 +25,7 @@ export const Section: FC<SectionProps> = ({
     const backgroundClasses = {
         dark: 'bg-dk-black',
         darker: 'bg-dk-gray-900',
-        gradient: 'bg-gradient-to-br from-[#0C0C0F] to-[#1A1A20]',
+        gradient: 'bg-gradient-to-br from-[#1A1A1D] to-[#2B2B2F]',
         light: 'bg-dk-gray-100',
         none: '',
     };

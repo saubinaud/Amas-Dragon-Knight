@@ -27,9 +27,9 @@ export const Card: FC<CardProps> = ({
 
     const variantClasses = {
         default: 'bg-[#0D0D0D] border border-white/8 rounded-none',
-        bordered: 'bg-dk-black border-2 border-dk-red rounded-none shadow-[4px_4px_0px_0px_#E8000A]',
+        bordered: 'bg-dk-black border-2 border-dk-red rounded-none shadow-[4px_4px_0px_0px_#C8102E]',
         glass: 'bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-none',
-        'gradient-border': 'bg-[#141418] border border-white/10 rounded-2xl shadow-xl',
+        'gradient-border': 'bg-[#222225] border border-white/10 rounded-2xl shadow-xl',
     };
 
     return (
@@ -37,7 +37,7 @@ export const Card: FC<CardProps> = ({
             className={cn(
                 variantClasses[variant],
                 paddingClasses[padding],
-                hoverable && 'hover:border-dk-red hover:shadow-[4px_4px_0px_0px_#E8000A] transition-all duration-200 cursor-pointer',
+                hoverable && 'hover:border-dk-red hover:shadow-[4px_4px_0px_0px_#C8102E] transition-all duration-200 cursor-pointer',
                 className
             )}
         >

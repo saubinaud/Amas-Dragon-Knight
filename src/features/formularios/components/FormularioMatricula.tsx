@@ -998,7 +998,7 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
     <SimpleDialog isOpen={isOpen} onClose={onClose}>
       <div >
         {/* Header Sticky */}
-        <div className="flex items-start justify-between sticky top-0 bg-[#141418] z-20 pb-3 sm:pb-4 border-b border-dk-red/30 px-4 sm:px-6 pt-4 sm:pt-6">
+        <div className="flex items-start justify-between sticky top-0 bg-[#222225] z-20 pb-3 sm:pb-4 border-b border-dk-red/30 px-4 sm:px-6 pt-4 sm:pt-6">
           <div className="flex-1 pr-4 sm:pr-8">
             <h2 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 font-heading uppercase tracking-wider">
               Formulario de Matrícula

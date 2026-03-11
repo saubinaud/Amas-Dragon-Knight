@@ -18,7 +18,7 @@ export const WhatIncludes: FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="border-2 border-dk-red shadow-[6px_6px_0px_0px_#E8000A]"
+                    className="border-2 border-dk-red shadow-[6px_6px_0px_0px_#C8102E]"
                 >
                     <div className="px-8 pt-8 pb-2 border-b border-dk-red/30">
                         <p className="text-dk-red font-heading text-xs tracking-[0.4em] uppercase font-bold mb-2">— Lo que recibes —</p>

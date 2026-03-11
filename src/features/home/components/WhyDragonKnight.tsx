@@ -153,7 +153,7 @@ export const WhyDragonKnight = () => {
                         className="text-5xl sm:text-6xl md:text-7xl font-heading font-bold text-white uppercase tracking-tighter leading-[0.85]"
                     >
                         ¿Por Qué{' '}
-                        <span className="text-transparent [-webkit-text-stroke:2px_#E8000A]">
+                        <span className="text-transparent [-webkit-text-stroke:2px_#C8102E]">
                             Dragon Knight
                         </span>
                         ?

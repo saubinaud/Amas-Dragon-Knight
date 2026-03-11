@@ -32,7 +32,7 @@ export const TrialHero: FC = () => {
                 >
                     Clase de<br />
                     Prueba{' '}
-                    <span className="text-transparent [-webkit-text-stroke:3px_#E8000A]">GRATIS</span>
+                    <span className="text-transparent [-webkit-text-stroke:3px_#C8102E]">GRATIS</span>
                 </motion.h1>
 
                 <motion.p

@@ -4,17 +4,17 @@
 /* ===== DRAGON KNIGHT — Elite Martial Design System ===== */
 @theme {
   /* ===== Core Palette ===== */
-  --color-dk-black: #0C0C0F;
-  --color-dk-surface: #141418;
-  --color-dk-card: #1A1A20;
+  --color-dk-black: #1A1A1D;
+  --color-dk-surface: #222225;
+  --color-dk-card: #2B2B2F;
   --color-dk-border: rgba(255, 255, 255, 0.07);
   --color-dk-white: #FFFFFF;
   --color-dk-muted: #6B7280;
   --color-dk-subtle: #9CA3AF;
 
   /* DK Red — the single accent */
-  --color-dk-red: #E8000A;
-  --color-dk-red-light: #FF1A22;
+  --color-dk-red: #C8102E;
+  --color-dk-red-light: #DF1939;
   --color-dk-red-dim: rgba(232, 0, 10, 0.12);
   --color-dk-red-glow: rgba(232, 0, 10, 0.25);
 
