@@ -1,10 +1,11 @@
 import { useState, useCallback, memo, useEffect, useRef } from 'react';
-import type { ChangeEvent, FormEvent } from 'react';
-import { Loader2, Upload, File, Trash2, ChevronDown, ChevronRight, Check, Sparkles, Award, Gift, Heart, Trophy, Zap, Swords, Diamond, Crown, Shield, X } from 'lucide-react';
+import type { FormEvent } from 'react';
+import { Loader2, ChevronDown, Check, Sparkles, Award, Gift, Heart, Trophy, Zap, Swords, Diamond, Crown, Shield, X } from 'lucide-react';
 import { Button } from '@/shared/components/ui-forms/form-button';
 import { Input } from '@/shared/components/ui-forms/input';
 import { Label } from '@/shared/components/ui-forms/label';
 import { toast } from 'sonner';
+import { ContratoFirma } from './ContratoFirma';
 
 // ========== CONSTANTES ==========
 
@@ -424,10 +425,9 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
   const [planSeleccionado, setPlanSeleccionado] = useState<'full' | '6meses' | '12meses_sin' | '12meses_con' | '1mes' | null>(null);
   const [mostrar1Mes, setMostrar1Mes] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [firmaBase64, setFirmaBase64] = useState<string | null>(null);
   const [polosOption, setPolosOption] = useState<'0' | '1' | '2' | '3'>('0');
   const [tallasPolos, setTallasPolos] = useState<string[]>([]);
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [fileBase64, setFileBase64] = useState<string>('');
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
 
   const [horariosInfo, setHorariosInfo] = useState<HorariosInfo | null>(null);
@@ -435,7 +435,6 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
   const [diasTentativos, setDiasTentativos] = useState<string[]>([]);
   const [codigoPromocional, setCodigoPromocional] = useState<string>('');
   const [codigoAplicado, setCodigoAplicado] = useState<CodigoAplicado | null>(null);
-  const [contratoExpanded, setContratoExpanded] = useState(false);
   const [fechaFinCalculada, setFechaFinCalculada] = useState<string>('');
   const [detallesFechaFin, setDetallesFechaFin] = useState<{
     clasesTotales: number;
@@ -530,50 +529,6 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
 
   const handleInputChange = useCallback((field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-  }, []);
-
-  const handleFileUpload = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const maxSize = 5 * 1024 * 1024;
-    if (file.size > maxSize) {
-      toast.error('El archivo es demasiado grande. Máximo 5MB.');
-      return;
-    }
-
-    const validTypes = [
-      'application/pdf',
-      'image/jpeg',
-      'image/jpg',
-      'image/png',
-      'image/webp',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    ];
-
-    if (!validTypes.includes(file.type)) {
-      toast.error('Tipo de archivo no válido. Use PDF, imagen o documento Word.');
-      return;
-    }
-
-    setUploadedFile(file);
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const base64String = e.target?.result as string;
-      setFileBase64(base64String);
-      toast.success('Archivo cargado correctamente');
-    };
-    reader.onerror = () => {
-      toast.error('Error al leer el archivo');
-    };
-    reader.readAsDataURL(file);
-  }, []);
-
-  const handleRemoveFile = useCallback(() => {
-    setUploadedFile(null);
-    setFileBase64('');
   }, []);
 
   const handleFechaNacimientoChange = useCallback((fecha: string) => {
@@ -706,9 +661,9 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
       return;
     }
 
-    if (!uploadedFile) {
-      const confirm = window.confirm('No ha subido el contrato firmado. ¿Desea continuar de todas formas?');
-      if (!confirm) return;
+    if (!firmaBase64) {
+      toast.error('Por favor firma el contrato antes de enviar');
+      return;
     }
 
     setIsSubmitting(true);
@@ -758,12 +713,8 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
         subtotal: subtotal,
         total: total,
 
-        contratoFirmado: uploadedFile ? {
-          nombre: uploadedFile.name,
-          tipo: uploadedFile.type,
-          tamaño: uploadedFile.size,
-          base64: fileBase64
-        } : null,
+        contratoFirmado: true,
+        firmaBase64: firmaBase64,
 
         fechaRegistro: new Date().toISOString()
       };
@@ -1770,68 +1721,29 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
             )}
           </div>
 
-          {/* Contrato Firmado */}
-          <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 sm:p-8">
-            <button
-              type="button"
-              onClick={() => setContratoExpanded(!contratoExpanded)}
-              className="w-full flex items-center justify-between"
-            >
-              <h3 className="text-white text-lg font-semibold">
-                Contrato Firmado (Opcional)
-              </h3>
-              {contratoExpanded ? (
-                <ChevronDown className="w-5 h-5 text-white/60" />
-              ) : (
-                <ChevronRight className="w-5 h-5 text-white/60" />
-              )}
-            </button>
-
-            {contratoExpanded && (
-              <div className="mt-4">
-                <p className="text-white/60 text-sm mb-4">
-                  Si ya tienes el contrato firmado físicamente, puedes subirlo aquí:
-                </p>
-
-                {!uploadedFile ? (
-                  <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/20 rounded-lg cursor-pointer hover:border-[#FA7B21]/50 transition-colors bg-zinc-800/30">
-                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                      <Upload className="w-10 h-10 mb-3 text-white/40" />
-                      <p className="mb-2 text-sm text-white/60">
-                        <span className="font-semibold">Click para subir</span> o arrastra aquí
-                      </p>
-                      <p className="text-xs text-white/40">PDF, JPG, PNG (MAX. 5MB)</p>
-                    </div>
-                    <input
-                      type="file"
-                      className="hidden"
-                      onChange={handleFileUpload}
-                      accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx"
-                    />
-                  </label>
-                ) : (
-                  <div className="flex items-center justify-between p-4 bg-zinc-800/50 border border-[#FA7B21]/30 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <File className="w-8 h-8 text-[#FCA929]" />
-                      <div>
-                        <p className="text-white text-sm">{uploadedFile.name}</p>
-                        <p className="text-white/40 text-xs">
-                          {(uploadedFile.size / 1024).toFixed(2)} KB
-                        </p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleRemoveFile}
-                      className="text-white/60 hover:text-red-500 transition-colors p-2"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
+          {/* Contrato Digital */}
+          <ContratoFirma
+            datos={{
+              nombrePadre: formData.nombrePadre,
+              dniPadre: formData.dniPadre,
+              email: formData.email,
+              direccion: formData.direccion,
+              nombreAlumno: formData.nombreAlumno,
+              dniAlumno: formData.dniAlumno,
+              fechaNacimiento: formData.fechaNacimiento,
+              categoriaAlumno: categoriaAlumno || 'No especificada',
+              programa: NOMBRES_PROGRAMA[planSeleccionado],
+              fechaInicio: formData.fechaInicio,
+              fechaFin: fechaFinCalculada,
+              clasesTotales: detallesFechaFin?.clasesTotales || PROGRAMA_CLASES[planSeleccionado],
+              turnoSeleccionado: turnoSeleccionado === 'manana' ? 'Mañana' : 'Tarde',
+              diasTentativos: diasTentativos.join(', '),
+              precioPrograma: precioBase,
+              descuentoDinero: descuentoDinero + descuentoPorcentualMonto,
+              total: total,
+            }}
+            onFirmaCompleta={(firma) => setFirmaBase64(firma)}
+          />
 
           {/* Resumen */}
           <div >
@@ -1871,7 +1783,7 @@ export const FormularioRenovacion = memo(function FormularioRenovacion({ onSucce
           {/* Submit Button */}
           <Button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !firmaBase64}
             className="w-full bg-gradient-to-r from-[#FA7B21] to-[#FCA929] hover:from-[#F36A15] hover:to-[#FA7B21] text-white py-6 text-lg shadow-lg shadow-[#FA7B21]/30 hover:shadow-[#FA7B21]/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (

@@ -11,6 +11,7 @@ import { Input } from '@/shared/components/ui-forms/input';
 import { Label } from '@/shared/components/ui-forms/label';
 import { toast } from 'sonner';
 import { useUmami } from '@/features/formularios/hooks/useUmami';
+import { ContratoFirma } from './ContratoFirma';
 
 // ========== CONSTANTES ==========
 
@@ -596,6 +597,7 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
 
   // Estados existentes
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [firmaBase64, setFirmaBase64] = useState<string | null>(null);
   const [polosOption, setPolosOption] = useState<'0' | '1' | '2' | '3'>('0');
   const [includeUniform, setIncludeUniform] = useState(false);
   const [tallasPolos, setTallasPolos] = useState<string[]>([]);
@@ -867,7 +869,10 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
       return;
     }
 
-    // Contract check removed
+    if (!firmaBase64) {
+      toast.error('Por favor firma el contrato antes de enviar');
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -929,7 +934,8 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
         total: total,
 
         // Contrato
-        contratoFirmado: null,
+        contratoFirmado: true,
+        firmaBase64: firmaBase64,
 
         fechaRegistro: new Date().toISOString()
       };
@@ -1772,11 +1778,38 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
               </div>
             </div>
 
+            {/* Contrato Digital */}
+            <div className="mt-6">
+              <ContratoFirma
+                datos={{
+                  nombrePadre: formData.nombrePadre,
+                  dniPadre: formData.dniPadre,
+                  email: formData.email,
+                  telefono: formData.telefono,
+                  direccion: formData.direccion,
+                  nombreAlumno: formData.nombreAlumno,
+                  dniAlumno: formData.dniAlumno,
+                  fechaNacimiento: formData.fechaNacimiento,
+                  categoriaAlumno: categoriaAlumno || 'No especificada',
+                  programa: programa === 'full' ? '3 Meses Full' : programa === '6meses' ? '6 Meses' : '1 Mes',
+                  fechaInicio: formData.fechaInicio,
+                  fechaFin: fechaFinCalculada,
+                  clasesTotales: detallesFechaFin?.clasesTotales || PROGRAMA_CLASES[programa],
+                  turnoSeleccionado: turnoSeleccionado === 'manana' ? 'Mañana' : 'Tarde',
+                  diasTentativos: diasTentativos.join(', '),
+                  precioPrograma: precioBase,
+                  descuentoDinero: descuentoDinero + descuentoPorcentualMonto,
+                  total: total,
+                }}
+                onFirmaCompleta={(firma) => setFirmaBase64(firma)}
+              />
+            </div>
+
             {/* Submit Button */}
             <div className="sticky bottom-0 -mx-4 sm:-mx-6 px-4 sm:px-6 py-4 bg-[#0A0A0A] border-t border-white/10">
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !firmaBase64}
                 className="w-full bg-dk-red hover:bg-red-700 text-white py-5 sm:py-6 text-sm sm:text-base md:text-lg shadow-[0_0_20px_rgba(220,38,38,0.2)] hover:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-dk-red font-heading uppercase tracking-widest rounded-none"
                 style={{
                   touchAction: 'manipulation',
