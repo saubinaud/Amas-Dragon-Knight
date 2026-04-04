@@ -12,6 +12,8 @@ const RegistroSeisMesesPage = lazy(() => import('@/features/formularios/pages/Re
 const RenovacionPage = lazy(() => import('@/features/formularios/pages/RenovacionPage'));
 const TorneoPage = lazy(() => import('@/features/torneo/TorneoPage'));
 const GraduacionPage = lazy(() => import('@/features/graduacion/GraduacionPage'));
+const AsistenciaPage = lazy(() => import('@/features/asistencia/AsistenciaPage'));
+const AsistenciaPanelPage = lazy(() => import('@/features/asistencia/AsistenciaPanelPage'));
 
 /**
  * Root app component with routing and shared layout
@@ -95,6 +97,22 @@ const App: FC = () => {
           element={
             <Suspense fallback={<FormLoading />}>
               <GraduacionPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/asistencia"
+          element={
+            <Suspense fallback={<FormLoading />}>
+              <AsistenciaPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/asistencia/panel"
+          element={
+            <Suspense fallback={<FormLoading />}>
+              <AsistenciaPanelPage />
             </Suspense>
           }
         />
