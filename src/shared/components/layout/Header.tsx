@@ -1,4 +1,5 @@
 import { type FC, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { DragonLogo } from '@/shared/components/ui/DragonLogo';
@@ -8,6 +9,8 @@ const NAV_LINKS = [
     { label: 'Inicio', href: '#' },
     { label: 'Filosofía', href: '#why-us' },
     { label: 'Planes', href: '#pricing' },
+    { label: 'Torneos', href: '/torneo', isRoute: true },
+    { label: 'Graduaciones', href: '/graduacion', isRoute: true },
 ] as const;
 
 export const Header: FC = () => {
@@ -28,12 +31,16 @@ export const Header: FC = () => {
         ['rgba(12, 12, 15, 0)', 'rgba(12, 12, 15, 0.96)']
     );
 
-    const scrollToSection = (id: string) => {
+    const navigateTo = useNavigate();
+
+    const handleNavClick = (href: string, isRoute?: boolean) => {
         setIsOpen(false);
-        if (id === '#') {
+        if (isRoute) {
+            navigateTo(href);
+        } else if (href === '#') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-            const element = document.querySelector(id);
+            const element = document.querySelector(href);
             if (element) element.scrollIntoView({ behavior: 'smooth' });
         }
     };
@@ -50,7 +57,7 @@ export const Header: FC = () => {
                         {/* Logo */}
                         <div
                             className="flex items-center gap-3 cursor-pointer group"
-                            onClick={() => scrollToSection('#')}
+                            onClick={() => handleNavClick('#')}
                         >
                             <DragonLogo size={40} variant="default" className="transition-transform duration-300 group-hover:scale-105" />
                             <div className="hidden sm:block leading-tight">
@@ -64,7 +71,7 @@ export const Header: FC = () => {
                             {NAV_LINKS.map((link) => (
                                 <button
                                     key={link.label}
-                                    onClick={() => scrollToSection(link.href)}
+                                    onClick={() => handleNavClick(link.href, 'isRoute' in link && link.isRoute)}
                                     className="relative text-sm font-medium text-white/60 hover:text-white transition-colors duration-200 link-underline"
                                 >
                                     {link.label}
@@ -73,7 +80,7 @@ export const Header: FC = () => {
                             <Button
                                 size="sm"
                                 className="ml-2 text-sm font-semibold"
-                                onClick={() => scrollToSection('#pricing')}
+                                onClick={() => handleNavClick('#pricing')}
                             >
                                 Inscribirme
                             </Button>
@@ -108,7 +115,7 @@ export const Header: FC = () => {
                                     initial={{ opacity: 0, x: -12 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.06 }}
-                                    onClick={() => scrollToSection(link.href)}
+                                    onClick={() => handleNavClick(link.href, 'isRoute' in link && link.isRoute)}
                                     className="flex items-center gap-4 py-3.5 text-left border-b border-white/[0.05] last:border-0 group"
                                 >
                                     <span className="text-[10px] font-semibold text-dk-red font-heading tracking-wider">0{i + 1}</span>
@@ -121,7 +128,7 @@ export const Header: FC = () => {
                                 <Button
                                     size="md"
                                     className="w-full font-semibold"
-                                    onClick={() => scrollToSection('#pricing')}
+                                    onClick={() => handleNavClick('#pricing')}
                                 >
                                     Inscribirme Ahora
                                 </Button>

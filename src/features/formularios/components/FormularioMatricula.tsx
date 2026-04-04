@@ -934,15 +934,14 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
         fechaRegistro: new Date().toISOString()
       };
 
-      const webhookUrl = 'https://pallium-n8n.s6hx3x.easypanel.host/webhook/formulario-dragon-knight';
+      const { API_BASE } = await import('@/config/api');
 
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(`${API_BASE}/matricula`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-        mode: 'cors'
       });
 
       if (response.ok || response.status === 200) {
