@@ -11,16 +11,16 @@ interface Instructor {
 
 const INSTRUCTORS: Instructor[] = [
     {
-        name: 'Maestro Carlos',
-        credentials: 'Campeón Nacional · 20 años de experiencia',
-        initials: 'MC',
+        name: 'Alexander Zea',
+        credentials: 'Maestro Fundador · Décadas formando campeones',
+        initials: 'AZ',
         dan: '5° Dan',
     },
     {
-        name: 'Instructora Ana',
-        credentials: 'Especialista en formación juvenil · Árbitro Internacional',
-        initials: 'IA',
-        dan: '3° Dan',
+        name: 'Rosmery Espinoza',
+        credentials: 'Instructora · Especialista en formación integral',
+        initials: 'RE',
+        dan: '1° Dan',
     },
 ];
 
