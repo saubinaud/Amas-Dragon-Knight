@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { useReveal } from '@/shared/hooks/useReveal';
 
 const stats = [
     { value: '25+', label: 'Años de tradición' },
@@ -8,6 +8,8 @@ const stats = [
 ];
 
 export const StatsStrip = () => {
+    const ref = useReveal<HTMLDivElement>({ children: true });
+
     return (
         <section
             className="py-10 sm:py-12 relative overflow-hidden"
@@ -17,16 +19,12 @@ export const StatsStrip = () => {
                 borderBottom: '1px solid rgba(200, 16, 46, 0.15)',
             }}
         >
-            <div className="max-w-6xl mx-auto px-6">
+            <div ref={ref} className="max-w-6xl mx-auto px-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
                     {stats.map((stat, i) => (
-                        <motion.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className={`group flex flex-col items-center text-center px-4 py-2 transition-all duration-300 ${
+                            className={`reveal reveal-delay-${i + 1} group flex flex-col items-center text-center px-4 py-2 transition-all duration-300 ${
                                 i < stats.length - 1 ? 'md:border-r md:border-white/[0.08]' : ''
                             }`}
                         >
@@ -36,7 +34,7 @@ export const StatsStrip = () => {
                             <span className="text-[10px] sm:text-xs text-white/40 font-medium uppercase tracking-[0.15em] group-hover:text-white/60 transition-colors duration-300">
                                 {stat.label}
                             </span>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>

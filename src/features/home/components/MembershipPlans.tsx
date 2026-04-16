@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Check, X, Zap, ArrowRight, Star } from 'lucide-react';
 import { FormularioMatricula } from '@/features/formularios/components/FormularioMatricula';
+import { useReveal } from '@/shared/hooks/useReveal';
 
 const plans = [
     {
@@ -56,6 +56,7 @@ const plans = [
 export const MembershipPlans = () => {
     const [selectedPlan, setSelectedPlan] = useState<'full' | '1mes' | '2meses' | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const ref = useReveal<HTMLDivElement>({ children: true });
 
     const handleSelectPlan = (planId: string) => {
         setSelectedPlan(planId as 'full' | '1mes' | '2meses');
@@ -64,51 +65,34 @@ export const MembershipPlans = () => {
 
     return (
         <section id="pricing" className="py-20 sm:py-28 bg-layered relative overflow-hidden">
-            {/* Grid pattern */}
             <div className="absolute inset-0 bg-grid-red pointer-events-none" />
 
-            <div className="max-w-6xl mx-auto px-6 relative z-10">
-                {/* Header (AMAS style) */}
+            <div ref={ref} className="max-w-6xl mx-auto px-6 relative z-10">
+                {/* Header */}
                 <div className="text-center mb-12 sm:mb-14">
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 bg-dk-red/10 border border-dk-red/20 rounded-full px-5 py-2 mb-5"
-                    >
+                    <div className="reveal inline-flex items-center gap-2 bg-dk-red/10 border border-dk-red/20 rounded-full px-5 py-2 mb-5">
                         <span className="text-[10px]">💪</span>
                         <span className="text-dk-red-light text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase font-heading">
                             Inversión en tu Futuro
                         </span>
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
-                    >
+                    </div>
+                    <h2 className="reveal reveal-delay-1 font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                         <span className="text-gradient-light">Elige tu</span>{' '}
                         <span className="text-gradient-red">plan</span>
-                    </motion.h2>
+                    </h2>
                 </div>
 
                 {/* Cards grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-6 md:max-w-none lg:max-w-6xl mx-auto">
                     {plans.map((plan, i) => (
-                        <motion.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, y: 24 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className={`relative flex flex-col rounded-2xl p-5 md:p-5 lg:p-7 border transition-all duration-500 ${
+                            className={`reveal reveal-delay-${i + 2} relative flex flex-col rounded-2xl p-5 md:p-5 lg:p-7 border transition-colors duration-300 ${
                                 plan.highlight
                                     ? 'bg-gradient-to-br from-[#222225] via-[#222225]/95 to-[#1A1A1D] border-2 border-dk-red shadow-2xl shadow-dk-red/20 scale-[1.02]'
                                     : 'bg-gradient-to-br from-[#222225] via-[#222225]/95 to-[#1A1A1D] border-white/[0.07] hover:border-white/[0.14] card-glow'
                             }`}
                         >
-                            {/* Popular badge (AMAS style — top right) */}
                             {plan.highlight && (
                                 <div className="absolute top-0 right-0 bg-gradient-to-r from-[#C8102E] to-[#DF1939] text-white text-[10px] sm:text-xs font-bold font-heading tracking-wider px-4 sm:px-5 py-2 sm:py-2.5 rounded-bl-xl shadow-lg flex items-center gap-1.5 z-10">
                                     <Star size={10} fill="currentColor" />
@@ -116,12 +100,10 @@ export const MembershipPlans = () => {
                                 </div>
                             )}
 
-                            {/* Hover glow overlay (highlight only) */}
                             {plan.highlight && (
                                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-dk-red/0 via-dk-red/[0.06] to-dk-red/0 pointer-events-none" />
                             )}
 
-                            {/* Duration & Name */}
                             <div className="mb-5">
                                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30">
                                     {plan.duration}
@@ -131,7 +113,6 @@ export const MembershipPlans = () => {
                                 </h3>
                             </div>
 
-                            {/* Price */}
                             <div className="mb-6">
                                 {plan.originalPrice && (
                                     <span className="text-xs line-through mb-1 block text-white/30">
@@ -157,7 +138,6 @@ export const MembershipPlans = () => {
                                 </span>
                             </div>
 
-                            {/* Features with check/x comparison */}
                             <ul className="space-y-2.5 mb-7 flex-1">
                                 {plan.features.map((feature, idx) => (
                                     <li key={idx} className="flex items-center gap-3">
@@ -180,7 +160,6 @@ export const MembershipPlans = () => {
                                 ))}
                             </ul>
 
-                            {/* CTA */}
                             <button
                                 onClick={() => handleSelectPlan(plan.id)}
                                 className={`group w-full font-heading font-semibold text-sm py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 active:scale-[0.97] ${
@@ -196,11 +175,10 @@ export const MembershipPlans = () => {
                                     : <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                                 }
                             </button>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
-                {/* Footer note */}
                 <p className="text-center text-white/25 text-xs mt-6 tracking-wide">
                     * Todos los planes incluyen evaluación inicial gratuita
                 </p>

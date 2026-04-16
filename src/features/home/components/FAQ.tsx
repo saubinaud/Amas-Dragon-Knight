@@ -1,6 +1,7 @@
 import { type FC, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, MapPin } from 'lucide-react';
+import { useReveal } from '@/shared/hooks/useReveal';
 
 interface FAQItem {
     question: string;
@@ -27,6 +28,7 @@ const FAQ_ITEMS: FAQItem[] = [
 
 export const FAQ: FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const ref = useReveal<HTMLDivElement>({ children: true });
 
     const toggle = useCallback((index: number) => {
         setOpenIndex((prev) => (prev === index ? null : index));
@@ -34,14 +36,14 @@ export const FAQ: FC = () => {
 
     return (
         <section id="faq" className="py-20 sm:py-28 bg-dk-black">
-            <div className="max-w-3xl mx-auto px-6">
+            <div ref={ref} className="max-w-3xl mx-auto px-6">
                 {/* Header */}
                 <div className="mb-10">
-                    <p className="text-dk-red text-xs font-semibold tracking-[0.35em] uppercase font-heading mb-3 flex items-center gap-2.5">
+                    <p className="reveal text-dk-red text-xs font-semibold tracking-[0.35em] uppercase font-heading mb-3 flex items-center gap-2.5">
                         <span className="w-5 h-[2px] bg-dk-red rounded-full" />
                         Preguntas frecuentes
                     </p>
-                    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                    <h2 className="reveal reveal-delay-1 font-heading text-3xl sm:text-4xl font-bold text-white tracking-tight">
                         Resolvemos tus dudas
                     </h2>
                 </div>
@@ -49,26 +51,24 @@ export const FAQ: FC = () => {
                 {/* Accordion */}
                 <div className="space-y-3">
                     {FAQ_ITEMS.map((item, i) => (
-                        <motion.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.08 }}
-                            className="rounded-2xl bg-dk-card border border-white/[0.07] overflow-hidden"
+                            className={`reveal reveal-delay-${i + 2} rounded-2xl bg-dk-card border border-white/[0.07] overflow-hidden`}
                         >
                             <button
                                 onClick={() => toggle(i)}
-                                className={`w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left transition-colors duration-200 cursor-pointer ${openIndex === i ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'
-                                    }`}
+                                className={`w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left transition-colors duration-200 cursor-pointer ${
+                                    openIndex === i ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'
+                                }`}
                             >
                                 <span className="font-heading text-base font-semibold text-white leading-snug">
                                     {item.question}
                                 </span>
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 ${openIndex === i
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 ${
+                                    openIndex === i
                                         ? 'bg-dk-red text-white'
                                         : 'bg-white/[0.07] text-white/50'
-                                    }`}>
+                                }`}>
                                     {openIndex === i
                                         ? <Minus size={13} strokeWidth={2.5} />
                                         : <Plus size={13} strokeWidth={2.5} />
@@ -82,7 +82,7 @@ export const FAQ: FC = () => {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: 'auto', opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                                        transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
                                         className="overflow-hidden"
                                     >
                                         <div className="px-5 sm:px-6 pb-6 text-white/50 text-sm leading-relaxed">
@@ -97,7 +97,7 @@ export const FAQ: FC = () => {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>
