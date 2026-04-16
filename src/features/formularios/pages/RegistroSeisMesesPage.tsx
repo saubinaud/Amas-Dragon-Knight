@@ -50,7 +50,7 @@ export default function RegistroSeisMesesPage() {
                 )}
             </div>
 
-            <FormularioMatricula isOpen={isFormOpen} onClose={() => { setIsFormOpen(false); navigate('/'); }} programa="6meses" onSuccess={() => { }} />
+            <FormularioMatricula isOpen={isFormOpen} onClose={() => { setIsFormOpen(false); navigate('/'); }} programa="2meses" onSuccess={() => { }} />
         </div>
     );
 }

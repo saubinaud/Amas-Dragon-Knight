@@ -69,7 +69,7 @@ const App: FC = () => {
           }
         />
         <Route
-          path="/registro-6meses"
+          path="/registro-2meses"
           element={
             <Suspense fallback={<FormLoading />}>
               <RegistroSeisMesesPage />

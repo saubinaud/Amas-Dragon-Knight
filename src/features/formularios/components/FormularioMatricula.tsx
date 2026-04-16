@@ -49,22 +49,22 @@ const FERIADOS_MOVILES: Record<number, Array<{ fecha: string; nombre: string }>>
 // Clases por programa
 const PROGRAMA_CLASES: Record<string, number> = {
   "1mes": 8,
+  "2meses": 16, // 2 meses (2 veces por semana)
   "full": 24, // 3 meses
-  "6meses": 48 // 6 meses (2 veces por semana)
 };
 
 // Precios base por programa
 const PRECIOS_BASE: Record<string, number> = {
-  "1mes": 330,
-  "full": 869,
-  "6meses": 1699
+  "1mes": 300,
+  "2meses": 450,
+  "full": 559,
 };
 
 // Nombres de programas
 const NOMBRES_PROGRAMA: Record<string, string> = {
   "1mes": "Programa 1 Mes",
-  "full": "Programa 3 Meses FULL",
-  "6meses": "Programa 6 Meses"
+  "2meses": "Programa 2 Meses",
+  "full": "Programa 3 Meses",
 };
 
 // Códigos promocionales
@@ -82,49 +82,49 @@ const CODIGOS_PROMOCIONALES: Record<string, CodigoPromocional> = {
     tipo: "descuento_dinero",
     valor: 10,
     descripcion: "Descuento de S/ 10",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
   "AMAS-DESC20": {
     tipo: "descuento_dinero",
     valor: 20,
     descripcion: "Descuento de S/ 20",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
   "AMAS-DESC50": {
     tipo: "descuento_dinero",
     valor: 50,
     descripcion: "Descuento de S/ 50",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
   "AMAS-DESC100": {
     tipo: "descuento_dinero",
     valor: 100,
     descripcion: "Descuento de S/ 100",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
   "AMAS-DESC150": {
     tipo: "descuento_dinero",
     valor: 150,
     descripcion: "Descuento de S/ 150",
-    programasAplicables: ["full", "6meses"],
+    programasAplicables: ["full", "2meses"],
     activo: true
   },
   "AMAS-DESC200": {
     tipo: "descuento_dinero",
     valor: 200,
     descripcion: "Descuento de S/ 200",
-    programasAplicables: ["full", "6meses"],
+    programasAplicables: ["full", "2meses"],
     activo: true
   },
   "PRIMAVEZ": {
     tipo: "descuento_dinero",
     valor: 80,
     descripcion: "Descuento de S/ 80 para nuevos alumnos",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
 
@@ -133,28 +133,28 @@ const CODIGOS_PROMOCIONALES: Record<string, CodigoPromocional> = {
     tipo: "descuento_porcentaje",
     valor: 10,
     descripcion: "10% de descuento",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
   "AMAS15OFF": {
     tipo: "descuento_porcentaje",
     valor: 15,
     descripcion: "15% de descuento",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
   "AMAS20OFF": {
     tipo: "descuento_porcentaje",
     valor: 20,
     descripcion: "20% de descuento",
-    programasAplicables: ["full", "6meses"],
+    programasAplicables: ["full", "2meses"],
     activo: true
   },
   "BLACKFRIDAY": {
     tipo: "descuento_porcentaje",
     valor: 25,
     descripcion: "25% de descuento Black Friday",
-    programasAplicables: ["1mes", "full", "6meses"],
+    programasAplicables: ["1mes", "full", "2meses"],
     activo: true
   },
 
@@ -353,7 +353,7 @@ interface CodigoAplicado {
 interface FormularioMatriculaProps {
   isOpen: boolean;
   onClose: () => void;
-  programa: 'full' | '1mes' | '6meses';
+  programa: 'full' | '1mes' | '2meses';
   onSuccess: (total: number) => void;
 }
 
@@ -719,7 +719,7 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
 
   const total = Math.max(0, subtotal - descuentoPorcentualMonto);
 
-  const needsUniformSize = programa === 'full' || programa === '6meses' || (programa === '1mes' && includeUniform);
+  const needsUniformSize = programa === 'full' || (programa === '1mes' && includeUniform) || (programa === '2meses' && includeUniform);
   const needsPoloSize = polosOption !== '0';
 
   const handlePolosChange = useCallback((value: '0' | '1' | '2' | '3') => {
@@ -879,7 +879,7 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
     try {
       const payload = {
         // Información del programa
-        programa: programa === 'full' ? '3 Meses Full' : programa === '6meses' ? '6 Meses' : '1 Mes',
+        programa: programa === 'full' ? '3 Meses' : programa === '2meses' ? '2 Meses' : '1 Mes',
         clasesTotales: formData.fechaInicio === 'no-especificado' ? PROGRAMA_CLASES[programa] : (detallesFechaFin?.clasesTotales || PROGRAMA_CLASES[programa]),
 
         // Datos del alumno
@@ -1010,7 +1010,7 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
             </h2>
             <p className="text-white/70 text-xs sm:text-sm font-body">
               Programa: <span className="text-dk-red font-bold font-heading tracking-wide uppercase">
-                {programa === 'full' ? '3 Meses Full (S/ 869)' : programa === '6meses' ? '6 Meses (S/ 1699)' : '1 Mes (S/ 330)'}
+                {programa === 'full' ? '3 Meses (S/ 559)' : programa === '2meses' ? '2 Meses (S/ 450)' : '1 Mes (S/ 300)'}
               </span>
             </p>
           </div>
@@ -1261,7 +1261,7 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
             )}
 
             {/* Talla de uniforme para programas 3 meses y 6 meses */}
-            {(programa === 'full' || programa === '6meses') && (
+            {(programa === 'full') && (
               <div>
                 <h3 className="text-white text-lg mb-4 border-b border-white/10 pb-2">
                   Talla de Uniforme
@@ -1791,7 +1791,7 @@ export const FormularioMatricula = memo(function FormularioMatricula({ isOpen, o
                   dniAlumno: formData.dniAlumno,
                   fechaNacimiento: formData.fechaNacimiento,
                   categoriaAlumno: categoriaAlumno || 'No especificada',
-                  programa: programa === 'full' ? '3 Meses Full' : programa === '6meses' ? '6 Meses' : '1 Mes',
+                  programa: programa === 'full' ? '3 Meses' : programa === '2meses' ? '2 Meses' : '1 Mes',
                   fechaInicio: formData.fechaInicio,
                   fechaFin: fechaFinCalculada,
                   clasesTotales: detallesFechaFin?.clasesTotales || PROGRAMA_CLASES[programa],

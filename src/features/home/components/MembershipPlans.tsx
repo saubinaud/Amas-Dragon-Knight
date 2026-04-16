@@ -8,37 +8,52 @@ const plans = [
         id: '1mes',
         name: "Mes a Mes",
         duration: '1 mes',
-        price: "330",
-        features: ['8 Clases (2x semana)', 'Acceso a instalaciones', 'Seguimiento básico'],
+        price: "300",
+        features: [
+            '8 Clases (2x semana)',
+            'Acceso a instalaciones',
+        ],
+        highlight: false,
+    },
+    {
+        id: '2meses',
+        name: "Programa 2 Meses",
+        duration: '2 meses',
+        price: "450",
+        features: [
+            '16 Clases (2x semana)',
+            'Acceso a instalaciones',
+            'Seguimiento de progreso',
+        ],
         highlight: false,
     },
     {
         id: 'full',
         name: "Programa 3 Meses",
         duration: '3 meses',
-        price: "869",
-        originalPrice: "990",
-        features: ['24 Clases presenciales', 'Matrícula gratis', 'Uniforme oficial gratis', 'Evaluación física mensual', 'Acceso a torneos internos'],
+        price: "559",
+        originalPrice: "690",
+        features: [
+            '24 Clases presenciales',
+            'Matrícula gratis',
+            'Uniforme oficial incluido',
+            '1 Graduación + cinturón',
+            'Certificado de rango',
+            'Cartilla de seguimiento',
+            'Clases recuperables',
+            '1 Congelamiento incluido',
+        ],
         highlight: true,
-        tag: "Más popular",
+        tag: "Mejor valor",
     },
-    {
-        id: '6meses',
-        name: "Semestral",
-        duration: '6 meses',
-        price: "1699",
-        originalPrice: "1980",
-        features: ['48 Clases garantizadas', 'Matrícula gratis', 'Uniforme + Polo gratis', 'Plan nutricional básico', 'Seminarios exclusivos'],
-        highlight: false,
-    }
 ];
 
 export const MembershipPlans = () => {
-    const [selectedPlan, setSelectedPlan] = useState<'full' | '1mes' | '6meses' | null>(null);
+    const [selectedPlan, setSelectedPlan] = useState<'full' | '1mes' | '2meses' | null>(null);
     const [isFormOpen, setIsFormOpen] = useState(false);
 
     const handleSelectPlan = (planId: string) => {
-        setSelectedPlan(planId as 'full' | '1mes' | '6meses');
+        setSelectedPlan(planId as 'full' | '1mes' | '2meses');
         setIsFormOpen(true);
     };
 
