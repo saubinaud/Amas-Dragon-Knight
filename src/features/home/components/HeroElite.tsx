@@ -33,25 +33,25 @@ export const HeroElite = () => {
                 }}
             />
 
-            {/* Hero image — contained right, aggressive compression, loads in parallel */}
-            <div className="absolute inset-y-0 right-0 w-full md:w-[55%] lg:w-[50%] z-0 pointer-events-none">
+            {/* Hero image — full cover, subtle background (like before) */}
+            <div className="absolute inset-0 z-0">
                 <img
-                    src="https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_400/dragon-knight/hero-bw.png"
+                    src="https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_1200/dragon-knight/hero-bw.png"
                     srcSet="
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_300/dragon-knight/hero-bw.png 300w,
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_500/dragon-knight/hero-bw.png 500w,
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_700/dragon-knight/hero-bw.png 700w
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_800/dragon-knight/hero-bw.png 800w,
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_1200/dragon-knight/hero-bw.png 1200w,
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_1600/dragon-knight/hero-bw.png 1600w
                     "
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="100vw"
                     alt=""
-                    className="w-full h-full object-contain object-right opacity-70"
+                    className="w-full h-full object-cover opacity-25"
                     loading="eager"
                     decoding="async"
                 />
+                {/* Dark gradient overlays (like original) */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
             </div>
-            {/* Gradient overlays — lighter so image shows through */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent z-[1] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-[1] pointer-events-none" />
 
             {/* Main Content */}
             <div className="relative z-10 flex flex-col items-start px-6 sm:px-10 md:px-12 lg:px-24 max-w-5xl w-full">
