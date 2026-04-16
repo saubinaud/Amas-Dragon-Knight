@@ -13,7 +13,7 @@ interface Instructor {
 const INSTRUCTORS: Instructor[] = [
     {
         name: 'Alexander Zea',
-        credentials: 'Maestro Fundador · Décadas formando campeones',
+        credentials: 'Maestro Fundador · Academia Dragon Knight',
         initials: 'AZ',
         dan: '5° Dan',
         photo: 'https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_500/dragon-knight/alexander-zea.png',
@@ -46,7 +46,7 @@ export const Instructors: FC = () => {
                         <span className="text-gradient-red">pasión</span>
                     </h2>
                     <p className="reveal reveal-delay-2 text-white/40 text-sm sm:text-base mt-3 max-w-md mx-auto">
-                        Certificados con décadas de experiencia formando campeones
+                        Certificados y comprometidos con la formación integral
                     </p>
                 </div>
 

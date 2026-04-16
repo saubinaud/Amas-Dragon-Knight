@@ -33,22 +33,22 @@ export const HeroElite = () => {
                 }}
             />
 
-            {/* Hero image — full cover, subtle background (like before) */}
+            {/* Hero image — contained on the right, shown almost fully, with gradient overlay */}
             <div className="absolute inset-0 z-0">
                 <img
-                    src="https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_1200/dragon-knight/hero-bw.png"
+                    src="https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_700/dragon-knight/hero-bw.png"
                     srcSet="
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_800/dragon-knight/hero-bw.png 800w,
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_1200/dragon-knight/hero-bw.png 1200w,
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_1600/dragon-knight/hero-bw.png 1600w
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_500/dragon-knight/hero-bw.png 500w,
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_700/dragon-knight/hero-bw.png 700w,
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_1000/dragon-knight/hero-bw.png 1000w
                     "
-                    sizes="100vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     alt=""
-                    className="w-full h-full object-cover opacity-25"
+                    className="absolute top-0 right-0 h-full w-full md:w-[55%] lg:w-[50%] object-contain object-right-bottom opacity-85"
                     loading="eager"
                     decoding="async"
                 />
-                {/* Dark gradient overlays (like original) */}
+                {/* Gradient overlays — same feel as original, but on the full hero */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
             </div>
