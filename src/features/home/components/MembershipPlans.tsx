@@ -45,8 +45,6 @@ const plans = [
             { text: '1 Graduación + cinturón', included: true },
             { text: 'Certificado de rango', included: true },
             { text: 'Cartilla de seguimiento', included: true },
-            { text: 'Clases recuperables', included: true },
-            { text: '1 Congelamiento incluido', included: true },
         ],
         highlight: true,
         tag: "Mejor valor",

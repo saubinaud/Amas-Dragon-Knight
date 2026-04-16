@@ -72,7 +72,7 @@ export const Footer: FC = () => {
                             {[
                                 { icon: Instagram, label: '@dragonknightperu', href: '#' },
                                 { icon: Facebook, label: 'Dragon Knight PE', href: '#' },
-                                { icon: Phone, label: '+51 999 999 999', href: '#' },
+                                { icon: Phone, label: '+51 974 838 890', href: 'https://wa.me/51974838890' },
                             ].map(({ icon: Icon, label, href }) => (
                                 <a
                                     key={label}
