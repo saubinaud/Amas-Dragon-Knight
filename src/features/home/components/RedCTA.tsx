@@ -32,7 +32,7 @@ export const RedCTA: FC = () => {
                             No esperes más
                         </p>
                         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
-                            ¿Listo para evolucionar?
+                            ¿Listo para ser tu mejor versión?
                         </h2>
                         <p className="text-white/70 text-sm sm:text-base mt-3 leading-relaxed">
                             Tu verdadera transformación comienza con un solo paso.

@@ -11,7 +11,7 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         question: '¿Desde qué edad pueden entrenar?',
         answer:
-            'Aceptamos alumnos desde los 7 años. Nuestros programas están adaptados por grupos de edad para garantizar un entrenamiento seguro y efectivo: 7-10 años (infantil), 11-14 años (juvenil) y 15-17 años (adolescente).',
+            'Aceptamos alumnos desde 1 año de edad. Nuestros programas están adaptados por grupos de edad para garantizar un entrenamiento seguro y efectivo: estimulación temprana (1-3 años), infantil (4-10 años), juvenil (11-14 años), adolescente (15-17 años) y adultos.',
     },
     {
         question: '¿Necesito experiencia previa?',

@@ -1,7 +1,6 @@
 import { type FC } from 'react';
 import { HeroElite } from './components/HeroElite';
 import { StatsStrip } from './components/StatsStrip';
-import { BeltJourney } from './components/BeltJourney';
 import { TransformationProcess } from './components/TransformationProcess';
 import { Instructors } from './components/Instructors';
 import { Testimonials } from './components/Testimonials';
@@ -11,7 +10,7 @@ import { FAQ } from './components/FAQ';
 
 /**
  * Sales-focused landing page.
- * Flow: Hero → Stats → Why Us → Pricing (early) → Belt Journey → Instructors → Testimonials → CTA → FAQ
+ * Flow: Hero → Stats → Why Us → Pricing → Instructors → Testimonials → CTA → FAQ
  */
 export const HomePage: FC = () => {
     return (
@@ -20,7 +19,6 @@ export const HomePage: FC = () => {
             <StatsStrip />
             <TransformationProcess />
             <MembershipPlans />
-            <BeltJourney />
             <Instructors />
             <Testimonials />
             <RedCTA />
