@@ -36,11 +36,11 @@ export const HeroElite = () => {
             {/* Hero image — contained right, aggressive compression, loads in parallel */}
             <div className="absolute inset-y-0 right-0 w-full md:w-[55%] lg:w-[50%] z-0 pointer-events-none">
                 <img
-                    src="https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_500/dragon-knight/hero-bw.png"
+                    src="https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_400/dragon-knight/hero-bw.png"
                     srcSet="
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_400/dragon-knight/hero-bw.png 400w,
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_600/dragon-knight/hero-bw.png 600w,
-                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_800/dragon-knight/hero-bw.png 800w
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_300/dragon-knight/hero-bw.png 300w,
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_500/dragon-knight/hero-bw.png 500w,
+                        https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:low,w_700/dragon-knight/hero-bw.png 700w
                     "
                     sizes="(max-width: 768px) 100vw, 50vw"
                     alt=""

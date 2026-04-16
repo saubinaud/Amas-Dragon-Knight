@@ -16,7 +16,7 @@ const INSTRUCTORS: Instructor[] = [
         credentials: 'Maestro Fundador · Décadas formando campeones',
         initials: 'AZ',
         dan: '5° Dan',
-        photo: 'https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto,w_700/dragon-knight/alexander-zea.png',
+        photo: 'https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_500/dragon-knight/alexander-zea.png',
     },
     {
         name: 'Rosmery Espinoza',

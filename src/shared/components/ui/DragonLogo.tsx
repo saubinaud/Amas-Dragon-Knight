@@ -16,9 +16,9 @@ export const DragonLogo: FC<DragonLogoProps> = ({
     className,
     variant = 'default'
 }) => {
-    // Cloudinary transformation: f_auto (format), q_auto (quality), w_{size*2} for retina
+    // Cloudinary transformation: f_auto (WebP/AVIF), q_auto:eco (aggressive compression), w_{size*2} for retina
     const w = size * 2;
-    const src = `https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto,w_${w}/dragon-knight/logo.png`;
+    const src = `https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto:eco,w_${w}/dragon-knight/logo.png`;
 
     return (
         <img
