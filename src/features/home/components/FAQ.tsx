@@ -11,7 +11,7 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         question: '¿Desde qué edad pueden entrenar?',
         answer:
-            'Aceptamos alumnos desde 1 año de edad. Nuestros programas están adaptados por grupos de edad para garantizar un entrenamiento seguro y efectivo: estimulación temprana (1-3 años), infantil (4-10 años), juvenil (11-14 años), adolescente (15-17 años) y adultos.',
+            'Desde 1 año de edad. Tenemos programas especialmente diseñados para los más pequeños, adaptados a su desarrollo motor y cognitivo. Las clases son de 30 minutos para niños de 1 a 6 años, y de 50 minutos para alumnos de 7 años en adelante.',
     },
     {
         question: '¿Necesito experiencia previa?',
