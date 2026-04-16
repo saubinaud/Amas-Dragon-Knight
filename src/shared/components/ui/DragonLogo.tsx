@@ -8,17 +8,21 @@ interface DragonLogoProps {
 }
 
 /**
- * Dragon Knight logo — uses the REAL brand dragon PNG
- * Black dragon head inside a red circle
+ * Dragon Knight logo — served from Cloudinary with auto format/quality optimization.
+ * Cloudinary serves WebP/AVIF to supported browsers automatically.
  */
 export const DragonLogo: FC<DragonLogoProps> = ({
     size = 48,
     className,
     variant = 'default'
 }) => {
+    // Cloudinary transformation: f_auto (format), q_auto (quality), w_{size*2} for retina
+    const w = size * 2;
+    const src = `https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto,w_${w}/dragon-knight/logo.png`;
+
     return (
         <img
-            src="/dragon-logo.png"
+            src={src}
             alt="Dragon Knight"
             width={size}
             height={size}
@@ -28,6 +32,7 @@ export const DragonLogo: FC<DragonLogoProps> = ({
                 className
             )}
             loading="eager"
+            decoding="async"
         />
     );
 };
