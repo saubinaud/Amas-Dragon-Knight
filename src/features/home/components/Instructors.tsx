@@ -7,6 +7,7 @@ interface Instructor {
     credentials: string;
     initials: string;
     dan: string;
+    photo?: string;
 }
 
 const INSTRUCTORS: Instructor[] = [
@@ -15,6 +16,7 @@ const INSTRUCTORS: Instructor[] = [
         credentials: 'Maestro Fundador · Décadas formando campeones',
         initials: 'AZ',
         dan: '5° Dan',
+        photo: 'https://res.cloudinary.com/dkoocok3j/image/upload/f_auto,q_auto,w_700/dragon-knight/alexander-zea.png',
     },
     {
         name: 'Rosmery Espinoza',
@@ -54,33 +56,52 @@ export const Instructors: FC = () => {
                             key={instructor.name}
                             className={`reveal reveal-delay-${i + 3} group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#222225] via-[#222225]/95 to-[#1A1A1D] border border-white/[0.07] hover:border-dk-red/25 transition-colors duration-300 card-glow`}
                         >
-                            <div className="relative h-56 sm:h-64 md:h-72 overflow-hidden flex items-center justify-center">
-                                <div
-                                    className="absolute inset-0 pointer-events-none"
-                                    style={{
-                                        backgroundImage: `
-                                            linear-gradient(rgba(200, 16, 46, 0.3) 1px, transparent 1px),
-                                            linear-gradient(90deg, rgba(200, 16, 46, 0.3) 1px, transparent 1px)
-                                        `,
-                                        backgroundSize: '40px 40px',
-                                        opacity: 0.04,
-                                    }}
-                                />
+                            <div className="relative h-64 sm:h-72 md:h-80 overflow-hidden flex items-center justify-center">
+                                {instructor.photo ? (
+                                    <>
+                                        <img
+                                            src={instructor.photo}
+                                            alt={instructor.name}
+                                            className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                        {/* Bottom fade overlay so text area blends */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1D] via-[#1A1A1D]/20 to-transparent pointer-events-none" />
+                                    </>
+                                ) : (
+                                    <>
+                                        <div
+                                            className="absolute inset-0 pointer-events-none"
+                                            style={{
+                                                backgroundImage: `
+                                                    linear-gradient(rgba(200, 16, 46, 0.3) 1px, transparent 1px),
+                                                    linear-gradient(90deg, rgba(200, 16, 46, 0.3) 1px, transparent 1px)
+                                                `,
+                                                backgroundSize: '40px 40px',
+                                                opacity: 0.04,
+                                            }}
+                                        />
+                                        <span className="font-heading text-[5rem] sm:text-[6rem] font-bold text-white/[0.06] group-hover:text-white/[0.10] transition-colors duration-500 select-none z-10">
+                                            {instructor.initials}
+                                        </span>
+                                    </>
+                                )}
 
-                                <span className="font-heading text-[5rem] sm:text-[6rem] font-bold text-white/[0.06] group-hover:text-white/[0.10] transition-colors duration-500 select-none z-10">
-                                    {instructor.initials}
-                                </span>
+                                {/* Hover red tint */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-dk-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                                <div className="absolute inset-0 bg-gradient-to-t from-dk-red/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                <div className="absolute top-4 left-4 bg-gradient-to-r from-[#C8102E] to-[#DF1939] px-3.5 py-1.5 rounded-lg font-heading text-[10px] sm:text-xs text-white tracking-widest uppercase font-bold shadow-lg shadow-dk-red/20">
+                                {/* Dan badge */}
+                                <div className="absolute top-4 left-4 bg-gradient-to-r from-[#C8102E] to-[#DF1939] px-3.5 py-1.5 rounded-lg font-heading text-[10px] sm:text-xs text-white tracking-widest uppercase font-bold shadow-lg shadow-dk-red/30 z-20">
                                     {instructor.dan}
                                 </div>
 
-                                <div className="absolute top-4 right-4 w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center group-hover:border-dk-red group-hover:bg-dk-red/20 transition-all duration-300">
-                                    <Award size={16} className="text-white/30 group-hover:text-dk-red transition-colors" />
+                                {/* Award icon */}
+                                <div className="absolute top-4 right-4 w-9 h-9 rounded-lg border border-white/20 bg-black/40 backdrop-blur-sm flex items-center justify-center group-hover:border-dk-red group-hover:bg-dk-red/30 transition-all duration-300 z-20">
+                                    <Award size={16} className="text-white/70 group-hover:text-dk-red transition-colors" />
                                 </div>
 
+                                {/* Bottom animated accent line */}
                                 <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-dk-red to-dk-red-light group-hover:w-full transition-all duration-500 ease-out z-20" />
                             </div>
 
