@@ -2,9 +2,26 @@ import { type FC } from 'react';
 import { DragonLogo } from '@/shared/components/ui/DragonLogo';
 import { Instagram, Facebook, Phone } from 'lucide-react';
 
+const NAV_ITEMS = [
+    { label: 'Inicio', href: '#' },
+    { label: 'Filosofía', href: '#why-us' },
+    { label: 'Planes', href: '#pricing' },
+    { label: 'Instructores', href: '#instructores' },
+    { label: 'FAQ', href: '#faq' },
+];
+
+const handleScroll = (href: string) => {
+    if (href === '#') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+};
+
 export const Footer: FC = () => {
     return (
-        <footer className="relative bg-dk-surface border-t border-white/[0.06]">
+        <footer className="relative border-t border-dk-red/10" style={{ background: 'linear-gradient(to bottom, #111113, #0A0A0C)' }}>
             <div className="max-w-7xl mx-auto px-6 py-14 sm:py-16">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 mb-12">
                     {/* Brand */}
@@ -12,7 +29,17 @@ export const Footer: FC = () => {
                         <div className="flex items-center gap-3 mb-4">
                             <DragonLogo size={40} variant="default" />
                             <div className="leading-tight">
-                                <div className="font-heading text-base font-bold text-white tracking-tight">Dragon Knight</div>
+                                <div
+                                    className="font-heading text-base font-bold tracking-tight"
+                                    style={{
+                                        background: 'linear-gradient(135deg, #C8102E 0%, #DF1939 100%)',
+                                        WebkitBackgroundClip: 'text',
+                                        WebkitTextFillColor: 'transparent',
+                                        backgroundClip: 'text',
+                                    }}
+                                >
+                                    Dragon Knight
+                                </div>
                                 <div className="text-[10px] text-white/35 tracking-[0.3em] uppercase">Taekwondo Academy</div>
                             </div>
                         </div>
@@ -21,18 +48,18 @@ export const Footer: FC = () => {
                         </p>
                     </div>
 
-                    {/* Navigation */}
+                    {/* Navigation — functional anchor links */}
                     <div>
                         <p className="text-dk-red text-[10px] font-semibold tracking-[0.3em] uppercase font-heading mb-5">Navegación</p>
                         <ul className="space-y-2.5">
-                            {['Inicio', 'Filosofía', 'Planes', 'Instructores', 'FAQ'].map((item) => (
-                                <li key={item}>
-                                    <a
-                                        href="#"
-                                        className="text-white/45 hover:text-white text-sm transition-colors duration-200 link-underline"
+                            {NAV_ITEMS.map((item) => (
+                                <li key={item.label}>
+                                    <button
+                                        onClick={() => handleScroll(item.href)}
+                                        className="text-white/45 hover:text-dk-red text-sm transition-colors duration-200 link-underline cursor-pointer"
                                     >
-                                        {item}
-                                    </a>
+                                        {item.label}
+                                    </button>
                                 </li>
                             ))}
                         </ul>
@@ -66,8 +93,8 @@ export const Footer: FC = () => {
                 <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/25">
                     <p>© {new Date().getFullYear()} Dragon Knight. Todos los derechos reservados.</p>
                     <div className="flex gap-6">
-                        <a href="#" className="hover:text-white/60 transition-colors">Privacidad</a>
-                        <a href="#" className="hover:text-white/60 transition-colors">Términos</a>
+                        <span className="hover:text-white/60 transition-colors cursor-pointer">Privacidad</span>
+                        <span className="hover:text-white/60 transition-colors cursor-pointer">Términos</span>
                     </div>
                 </div>
             </div>

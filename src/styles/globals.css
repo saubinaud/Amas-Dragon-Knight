@@ -176,12 +176,58 @@ h6 {
   padding-inline: 1.5rem;
 }
 
-/* Gradient text */
+/* Gradient text — white */
 .text-gradient-white {
   background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Gradient text — red (brand) */
+.text-gradient-red {
+  background: linear-gradient(135deg, #C8102E 0%, #DF1939 25%, #FF4D6A 50%, #DF1939 75%, #C8102E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient text — subtle light */
+.text-gradient-light {
+  background: linear-gradient(to right, #fef2f2, #ffffff, #fef2f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Layered section background with radial glows */
+.bg-layered {
+  background:
+    radial-gradient(circle at 20% 50%, rgba(200, 16, 46, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(223, 25, 57, 0.08) 0%, transparent 60%),
+    linear-gradient(to bottom right, #1A1A1D, #151517, #1A1A1D);
+}
+
+.bg-layered-alt {
+  background:
+    radial-gradient(circle at 80% 30%, rgba(200, 16, 46, 0.10) 0%, transparent 50%),
+    radial-gradient(circle at 20% 70%, rgba(223, 25, 57, 0.06) 0%, transparent 50%),
+    linear-gradient(to bottom right, #1A1A1D, #151517, #1A1A1D);
+}
+
+/* Grid pattern overlay (like AMAS) */
+.bg-grid-red {
+  background-image:
+    linear-gradient(rgba(200, 16, 46, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 16, 46, 0.4) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.03;
+}
+
+/* Card with red glow on hover */
+.card-glow:hover {
+  box-shadow: 0 8px 40px rgba(200, 16, 46, 0.15), 0 0 60px rgba(200, 16, 46, 0.08);
+  border-color: rgba(200, 16, 46, 0.25);
 }
 
 /* Animated underline */

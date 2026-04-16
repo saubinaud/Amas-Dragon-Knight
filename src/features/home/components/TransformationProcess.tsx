@@ -24,33 +24,38 @@ const features = [
 
 export const TransformationProcess = () => {
     return (
-        <section id="why-us" className="py-20 sm:py-28 bg-dk-black">
-            <div className="max-w-6xl mx-auto px-6">
-                {/* Section header */}
-                <div className="mb-14 sm:mb-16">
-                    <motion.p
+        <section id="why-us" className="py-20 sm:py-28 bg-layered relative overflow-hidden">
+            {/* Grid pattern overlay */}
+            <div className="absolute inset-0 bg-grid-red pointer-events-none" />
+
+            <div className="max-w-6xl mx-auto px-6 relative z-10">
+                {/* Section header (AMAS style — centered with badge) */}
+                <div className="text-center mb-14 sm:mb-16">
+                    <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        className="text-dk-red text-xs font-semibold tracking-[0.35em] uppercase font-heading mb-3 flex items-center gap-2.5"
+                        className="inline-flex items-center gap-2 bg-dk-red/10 border border-dk-red/20 rounded-full px-5 py-2 mb-5"
                     >
-                        <span className="w-5 h-[2px] bg-dk-red rounded-full" />
-                        El Proceso de Transformación
-                    </motion.p>
+                        <span className="text-[10px]">✨</span>
+                        <span className="text-dk-red-light text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase font-heading">
+                            El Proceso de Transformación
+                        </span>
+                    </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight max-w-lg"
+                        className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight"
                     >
-                        Dominando tu{' '}
-                        <span className="text-white/40">Dragón Interior</span>
+                        <span className="text-gradient-red">Dominando</span>{' '}
+                        <span className="text-gradient-light">tu Dragón Interior</span>
                     </motion.h2>
                 </div>
 
-                {/* Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                {/* Cards with glow effect */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-6">
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
@@ -58,10 +63,13 @@ export const TransformationProcess = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.12 }}
-                            className="group bg-dk-card rounded-2xl p-6 sm:p-7 border border-white/[0.06] hover:border-white/[0.12] hover:bg-dk-card/80 transition-all duration-300"
+                            className="group relative bg-gradient-to-br from-[#222225] via-[#222225]/95 to-[#1A1A1D] rounded-2xl p-5 md:p-5 lg:p-7 border border-white/[0.07] hover:border-dk-red/25 transition-all duration-500 card-glow"
                         >
+                            {/* Corner accent (AMAS style) */}
+                            <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-dk-red/15 to-transparent rounded-br-full pointer-events-none" />
+
                             {/* Icon */}
-                            <div className="w-10 h-10 rounded-xl bg-dk-red/10 flex items-center justify-center mb-5 text-dk-red group-hover:bg-dk-red group-hover:text-white transition-all duration-300">
+                            <div className="relative w-12 h-12 rounded-xl bg-dk-red/10 flex items-center justify-center mb-5 text-dk-red group-hover:bg-dk-red group-hover:text-white group-hover:shadow-lg group-hover:shadow-dk-red/30 transition-all duration-300">
                                 <feature.icon className="w-5 h-5" />
                             </div>
 
@@ -72,9 +80,9 @@ export const TransformationProcess = () => {
                                 {feature.description}
                             </p>
 
-                            <ul className="space-y-2">
+                            <ul className="space-y-2.5">
                                 {feature.points.map((point, i) => (
-                                    <li key={i} className="flex items-center gap-2 text-xs text-white/40">
+                                    <li key={i} className="flex items-center gap-2.5 text-xs text-white/45">
                                         <span className="w-1.5 h-1.5 bg-dk-red rounded-full flex-shrink-0" />
                                         {point}
                                     </li>

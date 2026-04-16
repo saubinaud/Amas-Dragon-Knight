@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Zap, ArrowRight, Star } from 'lucide-react';
+import { Check, X, Zap, ArrowRight, Star } from 'lucide-react';
 import { FormularioMatricula } from '@/features/formularios/components/FormularioMatricula';
 
 const plans = [
@@ -10,8 +10,11 @@ const plans = [
         duration: '1 mes',
         price: "300",
         features: [
-            '8 Clases (2x semana)',
-            'Acceso a instalaciones',
+            { text: '8 Clases (2x semana)', included: true },
+            { text: 'Acceso a instalaciones', included: true },
+            { text: 'Matrícula gratis', included: false },
+            { text: 'Uniforme oficial', included: false },
+            { text: 'Graduación + cinturón', included: false },
         ],
         highlight: false,
     },
@@ -21,9 +24,11 @@ const plans = [
         duration: '2 meses',
         price: "450",
         features: [
-            '16 Clases (2x semana)',
-            'Acceso a instalaciones',
-            'Seguimiento de progreso',
+            { text: '16 Clases (2x semana)', included: true },
+            { text: 'Acceso a instalaciones', included: true },
+            { text: 'Seguimiento de progreso', included: true },
+            { text: 'Uniforme oficial', included: false },
+            { text: 'Graduación + cinturón', included: false },
         ],
         highlight: false,
     },
@@ -34,14 +39,14 @@ const plans = [
         price: "559",
         originalPrice: "690",
         features: [
-            '24 Clases presenciales',
-            'Matrícula gratis',
-            'Uniforme oficial incluido',
-            '1 Graduación + cinturón',
-            'Certificado de rango',
-            'Cartilla de seguimiento',
-            'Clases recuperables',
-            '1 Congelamiento incluido',
+            { text: '24 Clases presenciales', included: true },
+            { text: 'Matrícula gratis', included: true },
+            { text: 'Uniforme oficial incluido', included: true },
+            { text: '1 Graduación + cinturón', included: true },
+            { text: 'Certificado de rango', included: true },
+            { text: 'Cartilla de seguimiento', included: true },
+            { text: 'Clases recuperables', included: true },
+            { text: '1 Congelamiento incluido', included: true },
         ],
         highlight: true,
         tag: "Mejor valor",
@@ -58,33 +63,38 @@ export const MembershipPlans = () => {
     };
 
     return (
-        <section id="pricing" className="py-20 sm:py-28 bg-dk-surface/40">
-            <div className="max-w-6xl mx-auto px-6">
-                {/* Header */}
-                <div className="mb-12 sm:mb-14">
-                    <motion.p
+        <section id="pricing" className="py-20 sm:py-28 bg-layered relative overflow-hidden">
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-grid-red pointer-events-none" />
+
+            <div className="max-w-6xl mx-auto px-6 relative z-10">
+                {/* Header (AMAS style) */}
+                <div className="text-center mb-12 sm:mb-14">
+                    <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        className="text-dk-red text-xs font-semibold tracking-[0.35em] uppercase font-heading mb-3 flex items-center gap-2.5"
+                        className="inline-flex items-center gap-2 bg-dk-red/10 border border-dk-red/20 rounded-full px-5 py-2 mb-5"
                     >
-                        <span className="w-5 h-[2px] bg-dk-red rounded-full" />
-                        Inversión en tu Futuro
-                    </motion.p>
+                        <span className="text-[10px]">💪</span>
+                        <span className="text-dk-red-light text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase font-heading">
+                            Inversión en tu Futuro
+                        </span>
+                    </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
+                        className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
                     >
-                        Elige tu{' '}
-                        <span className="text-white/30">plan</span>
+                        <span className="text-gradient-light">Elige tu</span>{' '}
+                        <span className="text-gradient-red">plan</span>
                     </motion.h2>
                 </div>
 
                 {/* Cards grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-6 md:max-w-none lg:max-w-6xl mx-auto">
                     {plans.map((plan, i) => (
                         <motion.div
                             key={i}
@@ -92,22 +102,28 @@ export const MembershipPlans = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className={`relative flex flex-col rounded-2xl p-6 sm:p-7 border transition-all duration-300 ${plan.highlight
-                                    ? 'bg-dk-red border-dk-red shadow-2xl shadow-dk-red/20 scale-[1.02]'
-                                    : 'bg-dk-card border-white/[0.07] hover:border-white/[0.14] hover:bg-dk-card/80'
-                                }`}
+                            className={`relative flex flex-col rounded-2xl p-5 md:p-5 lg:p-7 border transition-all duration-500 ${
+                                plan.highlight
+                                    ? 'bg-gradient-to-br from-[#222225] via-[#222225]/95 to-[#1A1A1D] border-2 border-dk-red shadow-2xl shadow-dk-red/20 scale-[1.02]'
+                                    : 'bg-gradient-to-br from-[#222225] via-[#222225]/95 to-[#1A1A1D] border-white/[0.07] hover:border-white/[0.14] card-glow'
+                            }`}
                         >
-                            {/* Popular badge */}
+                            {/* Popular badge (AMAS style — top right) */}
                             {plan.highlight && (
-                                <div className="absolute -top-3.5 left-6 bg-white text-dk-red text-[10px] font-bold font-heading tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                                    <Star size={9} fill="currentColor" />
+                                <div className="absolute top-0 right-0 bg-gradient-to-r from-[#C8102E] to-[#DF1939] text-white text-[10px] sm:text-xs font-bold font-heading tracking-wider px-4 sm:px-5 py-2 sm:py-2.5 rounded-bl-xl shadow-lg flex items-center gap-1.5 z-10">
+                                    <Star size={10} fill="currentColor" />
                                     {plan.tag}
                                 </div>
                             )}
 
+                            {/* Hover glow overlay (highlight only) */}
+                            {plan.highlight && (
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-dk-red/0 via-dk-red/[0.06] to-dk-red/0 pointer-events-none" />
+                            )}
+
                             {/* Duration & Name */}
                             <div className="mb-5">
-                                <span className={`text-xs font-semibold uppercase tracking-[0.2em] ${plan.highlight ? 'text-white/60' : 'text-white/30'}`}>
+                                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30">
                                     {plan.duration}
                                 </span>
                                 <h3 className="font-heading text-xl font-bold text-white mt-1 tracking-tight">
@@ -118,31 +134,47 @@ export const MembershipPlans = () => {
                             {/* Price */}
                             <div className="mb-6">
                                 {plan.originalPrice && (
-                                    <span className={`text-xs line-through mb-1 block ${plan.highlight ? 'text-white/40' : 'text-white/25'}`}>
+                                    <span className="text-xs line-through mb-1 block text-white/30">
                                         S/ {plan.originalPrice}
                                     </span>
                                 )}
                                 <div className="flex items-baseline gap-1">
-                                    <span className={`text-sm font-medium ${plan.highlight ? 'text-white/60' : 'text-white/40'}`}>S/</span>
-                                    <span className="font-heading text-5xl sm:text-6xl font-bold text-white tracking-tight">
+                                    <span className="text-sm font-medium text-white/40">S/</span>
+                                    <span
+                                        className="font-heading text-5xl md:text-4xl lg:text-6xl font-bold tracking-tight"
+                                        style={plan.highlight ? {
+                                            background: 'linear-gradient(135deg, #C8102E, #DF1939, #FF4D6A)',
+                                            WebkitBackgroundClip: 'text',
+                                            WebkitTextFillColor: 'transparent',
+                                            backgroundClip: 'text',
+                                        } : { color: 'white' }}
+                                    >
                                         {plan.price}
                                     </span>
                                 </div>
-                                <span className={`text-[10px] uppercase tracking-[0.15em] mt-1 block ${plan.highlight ? 'text-white/50' : 'text-white/30'}`}>
+                                <span className="text-[10px] uppercase tracking-[0.15em] mt-1 block text-white/30">
                                     pago único
                                 </span>
                             </div>
 
-                            {/* Features */}
+                            {/* Features with check/x comparison */}
                             <ul className="space-y-2.5 mb-7 flex-1">
                                 {plan.features.map((feature, idx) => (
                                     <li key={idx} className="flex items-center gap-3">
-                                        <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${plan.highlight ? 'bg-white/20' : 'bg-white/[0.07]'
-                                            }`}>
-                                            <Check size={10} className="text-white" strokeWidth={3} />
+                                        <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                            feature.included
+                                                ? plan.highlight ? 'bg-dk-red/20 text-dk-red' : 'bg-white/[0.07] text-white/60'
+                                                : 'bg-white/[0.03] text-white/15'
+                                        }`}>
+                                            {feature.included
+                                                ? <Check size={10} strokeWidth={3} />
+                                                : <X size={9} strokeWidth={3} />
+                                            }
                                         </div>
-                                        <span className={`text-sm leading-snug ${plan.highlight ? 'text-white/85' : 'text-white/55'}`}>
-                                            {feature}
+                                        <span className={`text-sm leading-snug ${
+                                            feature.included ? 'text-white/60' : 'text-white/20 line-through'
+                                        }`}>
+                                            {feature.text}
                                         </span>
                                     </li>
                                 ))}
@@ -151,10 +183,12 @@ export const MembershipPlans = () => {
                             {/* CTA */}
                             <button
                                 onClick={() => handleSelectPlan(plan.id)}
-                                className={`group w-full font-heading font-semibold text-sm py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.97] ${plan.highlight
-                                        ? 'bg-white text-dk-red hover:bg-white/95 shadow-lg shadow-black/20'
-                                        : 'bg-white/[0.07] text-white border border-white/[0.1] hover:bg-white/[0.12]'
-                                    }`}
+                                className={`group w-full font-heading font-semibold text-sm py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 active:scale-[0.97] ${
+                                    plan.highlight
+                                        ? 'bg-gradient-to-r from-[#C8102E] to-[#DF1939] text-white hover:from-[#B00E28] hover:to-[#C8102E] shadow-lg shadow-dk-red/25 hover:shadow-dk-red/40'
+                                        : 'bg-white/[0.07] text-white border border-white/[0.1] hover:bg-white/[0.12] hover:border-dk-red/30'
+                                }`}
+                                style={{ touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent' }}
                             >
                                 Inscribirme Ahora
                                 {plan.highlight
